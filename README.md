@@ -15,7 +15,7 @@ npm install
 
 ## Deployment
 
-in deploy.js:
+In deploy.js:
 
 * change mnemonic to your personal account
 * change infura adress to your designated URL for ropsten
