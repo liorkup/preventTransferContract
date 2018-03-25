@@ -2,11 +2,11 @@ const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');
 const { interface, bytecode } = require('./compile');
 
-const mnemonic = 'pencil number mutual million field occur vivid document salon near only expose';
+const mnemonic = 'pencil ...';
 
 const provider = new HDWalletProvider(
   mnemonic,
-  'https://ropsten.infura.io/X4A2ELvPrPRyyqhvf0dl'
+  'https://ropsten.infura.io/X4A2ELvPrPRyyqhvf0dl' // set your infura url
 );
 const web3 = new Web3(provider);
 

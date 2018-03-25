@@ -1,8 +1,8 @@
 pragma solidity ^0.4.21;
 
-
 contract MyToken {
-  uint256 constant INITIAL_SUPPLY = 100;// * (10 ** uint256(decimals));
+  uint256 constant INITIAL_SUPPLY = 200;// * (10 ** uint256(decimals));
+  uint256 constant ADMIN_INITIAL_SUPPLY = 100;
 
   address public constant ADMIN_ADDRESS = 0x000e1cEC4Daa41D45DE7Cd92658f27e2A0A24DE3;
 
@@ -21,10 +21,12 @@ contract MyToken {
  /**
   * @dev Constructor that gives msg.sender all of existing tokens.
   */
-   function Test() public {
+   function MyToken() public {
      totalSupply = INITIAL_SUPPLY;
-     balances[ADMIN_ADDRESS] = INITIAL_SUPPLY;
-     emit Transfer(0x0, ADMIN_ADDRESS, INITIAL_SUPPLY);
+     balances[ADMIN_ADDRESS] = ADMIN_INITIAL_SUPPLY;
+     balances[msg.sender] = INITIAL_SUPPLY - ADMIN_INITIAL_SUPPLY;
+     emit Transfer(0x0, ADMIN_ADDRESS, balances[ADMIN_ADDRESS]);
+     emit Transfer(0x0, msg.sender, balances[msg.sender]);
    }
 
     /**
@@ -46,9 +48,11 @@ contract MyToken {
       require(transferAllowed);
       require(_to != address(0));
       require(_value <= balances[_from]);
+      require(_value <= allowed[_from][msg.sender]);
 
       balances[_from] -= _value;
       balances[_to] += _value;
+      allowed[_from][msg.sender] -= _value;
       emit Transfer(_from, _to, _value);
       return true;
     }
