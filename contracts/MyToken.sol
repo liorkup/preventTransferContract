@@ -4,7 +4,7 @@ contract MyToken {
   uint256 constant INITIAL_SUPPLY = 200;// * (10 ** uint256(decimals));
   uint256 constant ADMIN_INITIAL_SUPPLY = 100;
 
-  address public constant ADMIN_ADDRESS = 0x000e1cEC4Daa41D45DE7Cd92658f27e2A0A24DE3;
+  address public adminAddress;
 
   mapping(address => uint256) balances;
 
@@ -21,11 +21,12 @@ contract MyToken {
  /**
   * @dev Constructor that gives msg.sender all of existing tokens.
   */
-   function MyToken() public {
+   function MyToken(address _addr) public {
+     adminAddress = _addr;
      totalSupply = INITIAL_SUPPLY;
-     balances[ADMIN_ADDRESS] = ADMIN_INITIAL_SUPPLY;
+     balances[adminAddress] = ADMIN_INITIAL_SUPPLY;
      balances[msg.sender] = INITIAL_SUPPLY - ADMIN_INITIAL_SUPPLY;
-     emit Transfer(0x0, ADMIN_ADDRESS, balances[ADMIN_ADDRESS]);
+     emit Transfer(0x0, adminAddress, balances[adminAddress]);
      emit Transfer(0x0, msg.sender, balances[msg.sender]);
    }
 
@@ -72,13 +73,13 @@ contract MyToken {
     }
 
     function preventTransfers() public returns (bool success) {
-      require(msg.sender == ADMIN_ADDRESS);
+      require(msg.sender == adminAddress);
       transferAllowed = false;
       return true;
     }
 
     function allowTransfers() public returns (bool success) {
-      require(msg.sender == ADMIN_ADDRESS);
+      require(msg.sender == adminAddress);
       transferAllowed = true;
       return true;
     }
