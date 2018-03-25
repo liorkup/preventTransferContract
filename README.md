@@ -27,7 +27,7 @@ const provider = new HDWalletProvider(
 );
 ```
 
-run:
+Deploy:
 ```
 node deploy.js
 ```
