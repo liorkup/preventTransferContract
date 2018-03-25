@@ -14,16 +14,23 @@ npm install
 ```
 
 ## Deployment
-change mnemonic to your personal account
-change infura adress to your designated URL for ropsten
 
-deploy.js:
+in deploy.js:
+
+* change mnemonic to your personal account
+* change infura adress to your designated URL for ropsten
+* select admin address
+
+
 ```
 const mnemonic = 'pencil ...';
 
 const provider = new HDWalletProvider(
   mnemonic,
   'https://ropsten.infura.io/X4A2ELvPrPRyyqhvf0dl' // set your infura url
+  ....
+  
+  .deploy({ data: bytecode, arguments: ['0x000e1cEC4Daa41D45DE7Cd92658f27e2A0A24DE3'] })
 );
 ```
 
