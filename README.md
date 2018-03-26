@@ -5,6 +5,7 @@ MyToken is a simple ERC20 contract  with prevent & allow transfers methods.
 ### Prerequisites
 
 nodeJS
+
 npm
 
 
@@ -43,7 +44,7 @@ node deploy.js
 
 #### MyToken Cont'r
 
-Define Admin's address.
+Sets Admin's address.
 Grants initial 100 tokens in your and Admin's accounts.
 
 
@@ -133,7 +134,7 @@ function preventTransfers() public returns (bool success)
 
 ## Usage
 
-* Deploy contract with wanted Admin account.
+* Deploy contract with wanted Admin account. Admin and your accounts will be granted 100 tokens each.
 * Users can interact with contract and transfer tokens by using `transfer` and `transferFtom` methods.
 * Users can allow others to withdraw tokens from their account using `allowance` method.
 * Admin can use `preventTransfer` and `allowTransfers` methods to control the abilty of users to transfer tokens.
